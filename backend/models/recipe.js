@@ -6,14 +6,14 @@ const recipeSchema = mongoose.Schema(
       required: true,
     },
     ingredients: {
-      type: String,
+      type: Array,
       required: true,
     },
     instructions: {
       type: String,
       required: true,
     },
-    timeRequired: {
+    time: {
       type: String,
     },
     coverImage: {
