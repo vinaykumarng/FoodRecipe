@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import foodRecipe from '../assets/foodRecipe.png';
 import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
 import RecipeItems from '../../components/RecipeItems';
 import { useNavigate } from 'react-router-dom';
+import Modal from '../../components/Modal';
+import InputForm from '../../components/InputForm';
 
 export default function Home() {
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false)
+  const addRecipe = ()=>{
+    let token = localStorage.getItem("token");
+    if(token)
+      navigate("/addRecipe")
+    else{
+      setIsOpen(true);
+    }
+  }
   return (
     <>
       <section className="home">
@@ -19,7 +30,7 @@ export default function Home() {
             distribution of letters, as opposed to using 'Content here, content
             here', making it look like readable English.
           </h5>
-          <button onClick={() => navigate('/addRecipe')}>
+          <button onClick={addRecipe}>
             Share your recipe
           </button>
         </div>
@@ -36,6 +47,7 @@ export default function Home() {
           ></path>
         </svg>
       </div>
+      {(isOpen) && <Modal onClose={() => setIsOpen(false)}><InputForm setIsOpen={() => setIsOpen(false)} /></Modal>}
       <div className="recipe">
         <RecipeItems />
       </div>

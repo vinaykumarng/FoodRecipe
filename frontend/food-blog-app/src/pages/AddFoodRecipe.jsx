@@ -21,6 +21,7 @@ export const AddFoodRecipe = () => {
       .post('http://localhost:5000/recipe', recipeData, {
         headers: {
           'Content-Type': 'multipart/form-data',
+          'authorization': 'bearer ' + localStorage.getItem('token'),
         },
       })
       .then(() => navigate('/'));
